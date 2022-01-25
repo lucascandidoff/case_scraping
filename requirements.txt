@@ -1,0 +1,4 @@
+pandas
+wheel
+bs4
+selenium
