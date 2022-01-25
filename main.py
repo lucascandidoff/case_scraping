@@ -6,12 +6,15 @@ from selenium.common.exceptions import TimeoutException
 import time
 from bs4 import BeautifulSoup
 import pandas as pd
+import os
 
 chrome_options = Options()
 
 chrome_options.add_argument("--headless") # faz com que o browser não abra durante o processo
-p = '/Users/lucascandido/Documents/Estudos/Web_Scraping/chromedriver' 
-driver = webdriver.Chrome(executable_path=p,options=chrome_options)
+simp_path = 'chromedriver'
+abs_path = os.path.abspath(simp_path)
+os.chmod(abs_path,755)
+driver = webdriver.Chrome(executable_path=abs_path,options=chrome_options)
 driver.get('https://portal.cfm.org.br/busca-medicos/')
 timeout = 5
 
@@ -28,7 +31,7 @@ print('-=-==-=-=--=-=---=-=-=-=-=-=')
 
 time.sleep(10)
 
-for j in range(3):
+for j in range(2):
     next_page = driver.find_element_by_xpath(f'//*[@id="paginacao"]/div/div/ul/li[{j+1}]')
     driver.execute_script("return arguments[0].click();", next_page)
 
